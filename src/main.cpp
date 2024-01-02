@@ -1,29 +1,26 @@
 #include <raylib.h>
-#include "player.h"
+#include "food.h"
 
 int main()
 {
     Color darkGreen = Color{20, 160, 133, 255};
 
-    const int screenWidth = 750;
-    const int screenHeight = 750;
+    int cellsize = 30;
+    int cellCount = 25;
 
-    InitWindow(screenWidth, screenHeight, "Snake!");
+    InitWindow(cellsize * cellCount, cellsize * cellCount, "Snake!");
     SetTargetFPS(60);
 
-    Player player = Player(10, screenHeight / 2);
-
+    Food food = Food(5, 6);
 
     while (!WindowShouldClose())
     {
 
-        player.Update();
-        
         BeginDrawing();
 
             ClearBackground(darkGreen);
 
-            player.Draw();
+            food.Draw();
 
         EndDrawing();
     }
