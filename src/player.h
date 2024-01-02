@@ -5,7 +5,7 @@
 class Player
 {
 public:
-    Player(float positionX, float positionY, bool isPlayer1);
+    Player(float positionX, float positionY);
     void Update();
     void Draw();
 
