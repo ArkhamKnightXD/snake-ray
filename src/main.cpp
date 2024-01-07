@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include "food.h"
+#include "snake.h"
 
 int main()
 {
@@ -12,15 +13,19 @@ int main()
     SetTargetFPS(60);
 
     Food food = Food(5, 6);
+    Snake snake = Snake();
 
     while (!WindowShouldClose())
     {
-
+        
+        snake.Update();
+        
         BeginDrawing();
 
             ClearBackground(darkGreen);
 
             food.Draw();
+            snake.Draw();
 
         EndDrawing();
     }
