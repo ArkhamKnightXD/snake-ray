@@ -20,9 +20,10 @@ bool eventTriggered(double interval)
 
 Snake::Snake()
 {
-    body = {Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
+    body = {{6, 9}, {5, 9}, {4, 9}};
     direction = {1, 0};
     shouldAddSegment = false;
+    isGameOver = false;
 }
 
 void Snake::Update()
@@ -64,6 +65,10 @@ void Snake::Update()
     {
         direction = {0, 1};
     }
+
+    CheckCollisionWithEdges();
+
+    CheckCollisionBetweenHeadAndBody();
 }
 
 void Snake::Draw()
@@ -89,4 +94,29 @@ bool Snake::CheckCollisionWithFood(Vector2 position)
     }
 
     return false;
+}
+
+void Snake::CheckCollisionWithEdges()
+{
+    if (body[0].x == 25 || body[0].x == -1 || body[0].y == 25 || body[0].y == -1)
+    {
+        ResetPosition();
+    }
+}
+
+void Snake::CheckCollisionBetweenHeadAndBody()
+{
+    for (unsigned int i = 1; i < body.size(); i++)
+    {
+        if (Vector2Equals(body[0], body[i]))
+        {
+            ResetPosition();
+        }
+    }
+}
+
+void Snake::ResetPosition()
+{
+    body = {{6, 9}, {5, 9}, {4, 9}};
+    direction = {1, 0};
 }

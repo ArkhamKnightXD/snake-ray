@@ -12,6 +12,9 @@ public:
     void Update();
     void Draw();
     bool CheckCollisionWithFood(Vector2 position);
+    void CheckCollisionWithEdges();
+    void CheckCollisionBetweenHeadAndBody();
+    void ResetPosition();
 
 public:
     //a deque is a data structure that can be use to get elements from both 
@@ -19,4 +22,5 @@ public:
     std::deque<Vector2> body;
     Vector2 direction;
     bool shouldAddSegment;
+    bool isGameOver;
 };
