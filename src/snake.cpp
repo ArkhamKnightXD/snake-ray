@@ -22,15 +22,27 @@ Snake::Snake()
 {
     body = {Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
     direction = {1, 0};
+    shouldAddSegment = false;
 }
 
 void Snake::Update()
 {
     if (eventTriggered(0.2))
     {
-        // we remove the last element (The tail of the snake) and we push at the head the head + the direction
-        body.pop_back();
-        body.push_front(Vector2Add(body[0], direction));
+        if (!shouldAddSegment)
+        {
+            // we remove the last element (The tail of the snake) and we push at the head the head + the direction
+            body.pop_back();
+            body.push_front(Vector2Add(body[0], direction));
+        }
+        else
+        {
+            //its better to add the new element at the head, cuz this gives a better visual effect.
+            // When the element is added we need to stop the snake movement, to complete the visual effect.
+            body.push_front(Vector2Add(body[0], direction));
+
+            shouldAddSegment = false;
+        }
     }
 
     if (IsKeyPressed(KEY_D) && direction.x != -1)
@@ -72,6 +84,7 @@ bool Snake::CheckCollisionWithFood(Vector2 position)
 {
     if (Vector2Equals(body[0], position))
     {
+        shouldAddSegment = true;
         return true;   
     }
 

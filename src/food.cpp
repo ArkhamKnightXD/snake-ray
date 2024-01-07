@@ -1,6 +1,6 @@
 #include "food.h"
 
-Food::Food(float positionX, float positionY)
+Food::Food()
 {
     position = GenerateRandomPosition();
 
@@ -13,6 +13,7 @@ Food::Food(float positionX, float positionY)
     isDestroyed = false;
 }
 
+//We need to validate that the position of the food doesn't correspond with one within the body
 Vector2 Food::GenerateRandomPosition()
 {
     //Raylib method to get random values, between indicated values

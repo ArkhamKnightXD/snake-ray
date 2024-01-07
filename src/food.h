@@ -5,7 +5,7 @@
 class Food
 {
 public:
-    Food(float positionX, float positionY);
+    Food();
     void Update();
     void Draw();
     Vector2 GenerateRandomPosition();

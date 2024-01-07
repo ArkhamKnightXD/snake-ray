@@ -18,4 +18,5 @@ public:
     // sides of the list is a combination of stacks and queue
     std::deque<Vector2> body;
     Vector2 direction;
+    bool shouldAddSegment;
 };
