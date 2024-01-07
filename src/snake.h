@@ -8,7 +8,7 @@
 class Snake
 {
 public:
-    Snake();
+    Snake(int cellCount, int cellSize);
     void Update();
     void Draw();
     bool CheckCollisionWithFood(Vector2 position);
@@ -17,6 +17,10 @@ public:
     void ResetPosition();
 
 public:
+    int cellCount;
+    //I define this as a float to avoid casting warning 
+    float cellSize;
+    
     //a deque is a data structure that can be use to get elements from both 
     // sides of the list is a combination of stacks and queue
     std::deque<Vector2> body;

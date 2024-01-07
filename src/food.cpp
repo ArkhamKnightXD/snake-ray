@@ -1,7 +1,10 @@
 #include "food.h"
 
-Food::Food()
+Food::Food(int cellCount, int cellSize)
 {
+    this->cellCount = cellCount;
+    this->cellSize = cellSize;
+
     position = GenerateRandomPosition();
 
     Image image = LoadImage("assets/img/food.png");
@@ -17,8 +20,8 @@ Food::Food()
 Vector2 Food::GenerateRandomPosition()
 {
     //Raylib method to get random values, between indicated values
-    float positionX = GetRandomValue(0, 24);
-    float positionY = GetRandomValue(0, 24);
+    float positionX = GetRandomValue(0, cellCount - 1);
+    float positionY = GetRandomValue(0, cellCount - 1);
 
     return Vector2{positionX, positionY};
 }
@@ -33,11 +36,11 @@ void Food::Update()
 
 void Food::Draw()
 {
-    //cellsize = 30
-    DrawTexture(sprite, position.x * 30, position.y * 30, WHITE);
+    DrawTexture(sprite, position.x * cellSize, position.y * cellSize, WHITE);
 }
 
-//Object destructor
+//Object destructor is invoked automatically whenever an object is going to be destroyed. 
+//Meaning, a destructor is the last function that is going to be called before an object is destroyed.
 Food::~Food()
 {
     UnloadTexture(sprite);

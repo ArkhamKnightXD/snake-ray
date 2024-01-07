@@ -12,8 +12,8 @@ int main()
     InitWindow(cellsize * cellCount, cellsize * cellCount, "Snake!");
     SetTargetFPS(60);
 
-    Food food = Food();
-    Snake snake = Snake();
+    Food food = Food(cellCount, cellsize);
+    Snake snake = Snake(cellCount, cellsize);
 
     while (!WindowShouldClose())
     {

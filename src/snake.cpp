@@ -18,8 +18,11 @@ bool eventTriggered(double interval)
     return false;
 }
 
-Snake::Snake()
+Snake::Snake(int cellCount, int cellSize)
 {
+    this->cellCount = cellCount;
+    this->cellSize = cellSize;
+
     body = {{6, 9}, {5, 9}, {4, 9}};
     direction = {1, 0};
     shouldAddSegment = false;
@@ -79,7 +82,7 @@ void Snake::Draw()
         float positionX = body[i].x;
         float positionY = body[i].y;
 
-        Rectangle bounds = {positionX * 30, positionY * 30, 30, 30};
+        Rectangle bounds = {positionX * cellSize, positionY * cellSize, cellSize, cellSize};
 
         DrawRectangleRounded(bounds, 0.5, 6, BLACK);
     }
@@ -98,7 +101,7 @@ bool Snake::CheckCollisionWithFood(Vector2 position)
 
 void Snake::CheckCollisionWithEdges()
 {
-    if (body[0].x == 25 || body[0].x == -1 || body[0].y == 25 || body[0].y == -1)
+    if (body[0].x == cellCount || body[0].x == -1 || body[0].y == cellCount || body[0].y == -1)
     {
         ResetPosition();
     }
