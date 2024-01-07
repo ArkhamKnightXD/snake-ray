@@ -28,7 +28,6 @@ void Food::Update()
     {
         position = GenerateRandomPosition();
     }
-    
 }
 
 void Food::Draw()

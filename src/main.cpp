@@ -17,7 +17,6 @@ int main()
 
     while (!WindowShouldClose())
     {
-
         snake.Update();
 
         food.isDestroyed = snake.CheckCollisionWithFood(food.position);

@@ -6,7 +6,6 @@ double lastUpdateTime = 0;
 // method for control the speed that the snake has to move.
 bool eventTriggered(double interval)
 {
-
     double currentTime = GetTime();
 
     if (currentTime - lastUpdateTime >= interval)
@@ -27,7 +26,6 @@ Snake::Snake()
 
 void Snake::Update()
 {
-
     if (eventTriggered(0.2))
     {
         // we remove the last element (The tail of the snake) and we push at the head the head + the direction
