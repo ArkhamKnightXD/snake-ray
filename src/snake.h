@@ -1,5 +1,7 @@
 #pragma once
 
+//I only need to make the include in this header file, it is not necessary
+//  to write the include in the cpp file
 #include <raylib.h>
 #include <deque>
 
@@ -9,6 +11,7 @@ public:
     Snake();
     void Update();
     void Draw();
+    bool CheckCollisionWithFood(Vector2 position);
 
 public:
     //a deque is a data structure that can be use to get elements from both 

@@ -1,5 +1,4 @@
 #include "snake.h"
-#include <raylib.h>
 #include <raymath.h>
 
 double lastUpdateTime = 0;
@@ -69,4 +68,14 @@ void Snake::Draw()
 
         DrawRectangleRounded(bounds, 0.5, 6, BLACK);
     }
+}
+
+bool Snake::CheckCollisionWithFood(Vector2 position)
+{
+    if (Vector2Equals(body[0], position))
+    {
+        return true;   
+    }
+
+    return false;
 }

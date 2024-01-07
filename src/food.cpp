@@ -1,5 +1,4 @@
 #include "food.h"
-#include <raylib.h>
 
 Food::Food(float positionX, float positionY)
 {
@@ -10,6 +9,8 @@ Food::Food(float positionX, float positionY)
     sprite = LoadTextureFromImage(image);
 
     UnloadImage(image);
+
+    isDestroyed = false;
 }
 
 Vector2 Food::GenerateRandomPosition()
@@ -23,7 +24,11 @@ Vector2 Food::GenerateRandomPosition()
 
 void Food::Update()
 {
-
+    if (isDestroyed)
+    {
+        position = GenerateRandomPosition();
+    }
+    
 }
 
 void Food::Draw()
