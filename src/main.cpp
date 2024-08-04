@@ -1,11 +1,9 @@
 #include <raylib.h>
-#include "food.h"
-#include "snake.h"
+#include "Food.h"
+#include "Snake.h"
 
 int main()
 {
-    Color darkGreen = Color{20, 160, 133, 255};
-
     int cellsize = 30;
     int cellCount = 25;
 
@@ -25,7 +23,7 @@ int main()
         
         BeginDrawing();
 
-            ClearBackground(darkGreen);
+            ClearBackground({20, 160, 133, 255});
 
             food.Draw();
             snake.Draw();
@@ -34,5 +32,4 @@ int main()
     }
 
     CloseWindow();
-    return 0;
 }

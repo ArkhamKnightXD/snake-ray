@@ -1,4 +1,4 @@
-#include "food.h"
+#include "Food.h"
 
 Food::Food(int cellCount, int cellSize)
 {
@@ -6,12 +6,6 @@ Food::Food(int cellCount, int cellSize)
     this->cellSize = cellSize;
 
     position = GenerateRandomPosition();
-
-    Image image = LoadImage("assets/img/food.png");
-
-    sprite = LoadTextureFromImage(image);
-
-    UnloadImage(image);
 
     isDestroyed = false;
 }
@@ -36,12 +30,5 @@ void Food::Update()
 
 void Food::Draw()
 {
-    DrawTexture(sprite, position.x * cellSize, position.y * cellSize, WHITE);
-}
-
-//Object destructor is invoked automatically whenever an object is going to be destroyed. 
-//Meaning, a destructor is the last function that is going to be called before an object is destroyed.
-Food::~Food()
-{
-    UnloadTexture(sprite);
+    DrawRectangle(position.x * cellSize, position.y * cellSize, cellSize, cellSize, BLACK);
 }

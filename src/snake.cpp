@@ -1,4 +1,4 @@
-#include "snake.h"
+#include "Snake.h"
 #include <raymath.h>
 
 double lastUpdateTime = 0;
@@ -76,8 +76,8 @@ void Snake::Update()
 
 void Snake::Draw()
 {
-    // I use unsingned to avoid the warning of comparing the index with the body.size
-    for (unsigned int i = 0; i < body.size(); i++)
+    // I use size_t to avoid the warning of comparing the index with the body.size
+    for (size_t i = 0; i < body.size(); i++)
     {
         float positionX = body[i].x;
         float positionY = body[i].y;
@@ -109,7 +109,7 @@ void Snake::CheckCollisionWithEdges()
 
 void Snake::CheckCollisionBetweenHeadAndBody()
 {
-    for (unsigned int i = 1; i < body.size(); i++)
+    for (size_t i = 1; i < body.size(); i++)
     {
         if (Vector2Equals(body[0], body[i]))
         {
