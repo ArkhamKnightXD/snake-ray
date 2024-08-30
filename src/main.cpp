@@ -2,7 +2,7 @@
 #include "Snake.h"
 
 const int CELL_SIZE = 23;
-int CELL_COUNT = 23;
+const int CELL_COUNT = 23;
 
 int playerScore;
 
