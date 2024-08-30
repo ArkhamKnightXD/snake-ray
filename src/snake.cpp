@@ -122,4 +122,6 @@ void Snake::ResetPosition()
 {
     body = {{6, 9}, {5, 9}, {4, 9}};
     direction = {1, 0};
+
+    isGameOver = true;
 }
