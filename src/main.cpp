@@ -41,7 +41,6 @@ int main()
 
     while (!WindowShouldClose())
     {
-
         if (IsKeyPressed(KEY_SPACE))
         {
             isGamePaused = !isGamePaused;
