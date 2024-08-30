@@ -1,8 +1,15 @@
 #include <raylib.h>
 #include "Snake.h"
+#include <fstream>
 
 const int CELL_SIZE = 23;
 const int CELL_COUNT = 23;
+
+const int SCREEN_WIDTH = CELL_SIZE * CELL_COUNT;
+const int SCREEN_HEIGHT = CELL_SIZE * CELL_COUNT;
+
+int score;
+int highScore;
 
 typedef struct
 {
@@ -20,10 +27,52 @@ Vector2 generateRandomPosition()
     return Vector2{positionX, positionY};
 }
 
+void saveScore()
+{
+    std::ofstream highScores("high-score.txt");
+
+    std::string scoreString = std::to_string(score);
+    highScores << scoreString;
+
+    highScores.close();
+}
+
+int loadHighScore()
+{
+    std::string highScoreText;
+
+    std::ifstream highScores("high-score.txt");
+
+    if (!highScores.is_open())
+    {
+        saveScore();
+
+        std::ifstream auxHighScores("high-score.txt");
+
+        getline(auxHighScores, highScoreText);
+
+        highScores.close();
+
+        int highScore = stoi(highScoreText);
+
+        return highScore;
+    }
+
+    getline(highScores, highScoreText);
+
+    highScores.close();
+
+    int highScore = stoi(highScoreText);
+
+    return highScore;
+}
+
 int main()
 {
-    InitWindow(CELL_SIZE * CELL_COUNT, CELL_SIZE * CELL_COUNT, "Snake!");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake!");
     SetTargetFPS(60);
+
+    highScore = loadHighScore();
 
     Vector2 initialFoodPosition = generateRandomPosition();
 
@@ -34,8 +83,6 @@ int main()
     InitAudioDevice();
 
     Sound eatFoodSound = LoadSound("assets/sounds/okay.wav");
-
-    int playerScore;
 
     bool isGamePaused = false;
 
@@ -57,20 +104,28 @@ int main()
         if (food.isDestroyed)
         {
             food.position = generateRandomPosition();
-            playerScore++;
+            score++;
             PlaySound(eatFoodSound);
         }
 
         if (snake.isGameOver)
         {
-            playerScore = 0;
+            if (score > highScore)
+            {
+                highScore = score;
+
+                saveScore();
+            }
+
+            score = 0;
         }
 
         BeginDrawing();
 
         ClearBackground({20, 160, 133, 255});
 
-        DrawText(TextFormat("%i", playerScore), 250, 20, 40, BLACK);
+        DrawText(TextFormat("Score: %i", score), SCREEN_WIDTH / 2 + 90, 20, 22, BLACK);
+        DrawText(TextFormat("High Score %i", highScore), 50, 20, 22, BLACK);
 
         if (isGamePaused)
         {
