@@ -37,7 +37,7 @@ int main()
 
     int playerScore;
 
-    bool isGamePaused;
+    bool isGamePaused = false;
 
     while (!WindowShouldClose())
     {
