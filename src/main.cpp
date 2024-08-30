@@ -4,8 +4,6 @@
 const int CELL_SIZE = 23;
 const int CELL_COUNT = 23;
 
-int playerScore;
-
 typedef struct
 {
     int cellCount;
@@ -37,9 +35,23 @@ int main()
 
     Sound eatFoodSound = LoadSound("assets/sounds/okay.wav");
 
+    int playerScore;
+
+    bool isGamePaused;
+
     while (!WindowShouldClose())
     {
-        snake.Update();
+
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            isGamePaused = !isGamePaused;
+            PlaySound(eatFoodSound);
+        }
+
+        if (!isGamePaused)
+        {
+            snake.Update();
+        }
 
         food.isDestroyed = snake.CheckCollisionWithFood(food.position);
 
@@ -60,6 +72,11 @@ int main()
         ClearBackground({20, 160, 133, 255});
 
         DrawText(TextFormat("%i", playerScore), 250, 20, 40, BLACK);
+
+        if (isGamePaused)
+        {
+            DrawText("Game Paused", 130, 60, 40, BLACK);
+        }
 
         DrawRectangle(food.position.x * CELL_SIZE, food.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE, BLACK);
 
